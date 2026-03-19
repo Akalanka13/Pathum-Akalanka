@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Anti-Gravity Portfolio | Digital Content Creator</title>
+
+    <!-- Google Fonts: Inter and Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;700;900&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <!-- Custom Cursor Glow -->
+    <div class="cursor-glow"></div>
+
+    <!-- Floating Glass Header -->
+    <header class="glass-header">
+        <a href="#hero" class="logo font-display">Pathum Akalanka</a>
+        <nav>
+            <a href="#hero">Home</a>
+            <a href="#services">Work</a>
+            <a href="#work">Gallery</a>
+            <a href="#contact" class="btn-primary glass-card">Let's Connect</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="hero-section">
+            <div class="floating-elements">
+                <div class="shape shape-1 glass-card"></div>
+                <div class="shape shape-2 glass-card"></div>
+                <div class="shape shape-3 glass-card"></div>
+                <!-- Floating Tech Logos -->
+                <div class="bg-logo logo-ps float-slow" style="filter: drop-shadow(0 0 10px rgba(49, 168, 255, 0.4));">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/photoshop/photoshop-original.svg"
+                        alt="Photoshop">
+                </div>
+                <div class="bg-logo logo-ae float-medium"
+                    style="filter: drop-shadow(0 0 10px rgba(153, 153, 255, 0.4));">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/aftereffects/aftereffects-original.svg"
+                        alt="After Effects">
+                </div>
+                <div class="bg-logo logo-html float-fast" style="filter: drop-shadow(0 0 10px rgba(228, 77, 38, 0.4));">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg"
+                        alt="HTML5">
+                </div>
+                <div class="bg-logo logo-js float-slow" style="filter: drop-shadow(0 0 10px rgba(240, 219, 79, 0.4));">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg"
+                        alt="JavaScript">
+                </div>
+            </div>
+
+            <div class="hero-container">
+                <div class="hero-content">
+                    <h1 class="hero-title">Creative<br><span class="text-gradient">Designer.</span></h1>
+                    <p class="hero-subtitle">High-End Digital Content Creation & Social Media Mastery.</p>
+                </div>
+
+                <div class="hero-image-wrapper">
+                    <div class="hero-image glass-card float-slow">
+                        <!-- Placeholder for user image. Suggest adding an img tag here or using background-image in CSS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services (What I Do) -> Moved Up -->
+        <section id="services" class="services-section">
+            <h2 class="section-title text-gradient">What I Do</h2>
+            <div class="services-container">
+                <div class="service-item float-slow">
+                    <div class="glass-card inner-pad">
+                        <h3>Social Media Management</h3>
+                        <p>Scaling brands with algorithmic mastery.</p>
+                    </div>
+                </div>
+                <div class="service-item float-medium">
+                    <div class="glass-card inner-pad">
+                        <h3>Promo Video Creation</h3>
+                        <p>Visually stunning shorts and reels.</p>
+                    </div>
+                </div>
+                <!-- New Categories -->
+                <div class="service-item float-slow">
+                    <div class="glass-card inner-pad">
+                        <h3>Social Media Post Designing</h3>
+                        <p>Eye-catching, high-converting graphics for modern brands.</p>
+                    </div>
+                </div>
+                <div class="service-item float-fast">
+                    <div class="glass-card inner-pad">
+                        <h3>Video Editing</h3>
+                        <p>Action-packed video production and cinematic event coverage.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Work/Projects (Gallery) -> Moved Down -->
+        <section id="work" class="work-section">
+            <h2 class="section-title text-gradient">Gallery</h2>
+            <div class="project-grid">
+                <div class="project-card glass-card">
+                    <div class="card-image new-gallery-img"></div>
+                </div>
+                <div class="project-card glass-card">
+                    <div class="card-image gallery-event-1"></div>
+                </div>
+                <div class="project-card glass-card">
+                    <div class="card-image gallery-event-2"></div>
+                </div>
+                <div class="project-card glass-card">
+                    <div class="card-image gallery-reel-1"></div>
+                </div>
+                <div class="project-card glass-card">
+                    <div class="card-image gallery-interview-1"></div>
+                </div>
+                <div class="project-card glass-card">
+                    <div class="card-image gallery-tv-1"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section id="contact" class="contact-section">
+            <div class="contact-form-container glass-card">
+                <h2 class="section-title">Initiate Contact</h2>
+                <form class="minimal-form">
+                    <div class="input-group">
+                        <input type="text" placeholder="Name" required />
+                    </div>
+                    <div class="input-group">
+                        <input type="email" placeholder="Email" required />
+                    </div>
+                    <div class="input-group">
+                        <textarea placeholder="Message" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit text-gradient">Send Transmission</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <script src="./main.js" defer></script>
+</body>
+
+</html>
