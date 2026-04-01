@@ -74,4 +74,119 @@ document.addEventListener('DOMContentLoaded', () => {
         target.classList.add('fade-in-up');
         observer.observe(target);
     });
+
+    // 3. Slideshow Logic
+    const track = document.querySelector('.slideshow-track');
+    if (track) {
+        const cards = Array.from(track.children);
+        const nextButton = document.querySelector('.next-slide');
+        const prevButton = document.querySelector('.prev-slide');
+        const dotsNav = document.querySelector('.slideshow-dots');
+        
+        let currentIndex = 0;
+
+        // Create dots
+        cards.forEach((_, index) => {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            if (index === 0) dot.classList.add('active');
+            dot.dataset.index = index;
+            dotsNav.appendChild(dot);
+        });
+
+        const dots = Array.from(dotsNav.children);
+
+        const getCardWidth = () => {
+            if (!cards[0]) return 0;
+            const cardWidth = cards[0].getBoundingClientRect().width;
+            const gap = parseFloat(window.getComputedStyle(track).gap) || 0;
+            return cardWidth + gap;
+        };
+
+        const updateTrackPosition = () => {
+            if (!cards[0]) return;
+            const trackWrapperWidth = document.querySelector('.slideshow-track-wrapper').getBoundingClientRect().width;
+            const cardWidth = getCardWidth();
+            const visibleCards = Math.max(1, Math.floor(trackWrapperWidth / cardWidth));
+            const maxIndex = Math.max(0, cards.length - visibleCards);
+            
+            if (currentIndex > maxIndex) {
+                currentIndex = 0;
+            }
+            if (currentIndex < 0) {
+                currentIndex = Math.max(0, maxIndex);
+            }
+            
+            track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+            
+            dots.forEach(dot => dot.classList.remove('active'));
+            if(dots[currentIndex]) {
+                dots[currentIndex].classList.add('active');
+            }
+        };
+
+        const moveToNextSlide = () => {
+            const trackWrapperWidth = document.querySelector('.slideshow-track-wrapper').getBoundingClientRect().width;
+            let cardWidth = getCardWidth();
+            // Fallback for very first load sometimes returning 0
+            if (cardWidth === 0) cardWidth = 280; 
+            
+            const maxIndex = Math.max(0, cards.length - Math.floor(trackWrapperWidth / cardWidth));
+            
+            if (currentIndex < maxIndex) {
+                currentIndex++;
+            } else {
+                currentIndex = 0;
+            }
+            updateTrackPosition();
+        };
+
+        const moveToPrevSlide = () => {
+            const trackWrapperWidth = document.querySelector('.slideshow-track-wrapper').getBoundingClientRect().width;
+            let cardWidth = getCardWidth();
+            if (cardWidth === 0) cardWidth = 280;
+
+            const maxIndex = Math.max(0, cards.length - Math.floor(trackWrapperWidth / cardWidth));
+            
+            if (currentIndex > 0) {
+                currentIndex--;
+            } else {
+                currentIndex = maxIndex;
+            }
+            updateTrackPosition();
+        };
+
+        if (nextButton) nextButton.addEventListener('click', () => {
+            moveToNextSlide();
+            resetAutoPlay();
+        });
+
+        if (prevButton) prevButton.addEventListener('click', () => {
+            moveToPrevSlide();
+            resetAutoPlay();
+        });
+
+        if (dotsNav) dotsNav.addEventListener('click', e => {
+            const targetDot = e.target.closest('.dot');
+            if (!targetDot) return;
+            
+            currentIndex = parseInt(targetDot.dataset.index);
+            updateTrackPosition();
+            resetAutoPlay();
+        });
+
+        window.addEventListener('resize', updateTrackPosition);
+
+        // Auto-play
+        let autoPlayInterval = setInterval(moveToNextSlide, 3500);
+
+        const resetAutoPlay = () => {
+            clearInterval(autoPlayInterval);
+            autoPlayInterval = setInterval(moveToNextSlide, 3500);
+        };
+        
+        // Pause auto-play on hover
+        track.addEventListener('mouseenter', () => clearInterval(autoPlayInterval));
+        track.addEventListener('mouseleave', () => resetAutoPlay());
+    }
 });
