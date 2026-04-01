@@ -707,6 +707,10 @@ nav a:hover {
     background-image: url('./1.png');
 }
 
+.gallery-v-vs-r {
+    background-image: url('./V VS R.png');
+}
+
 /* Removed old unused backgrounds bg-thomian and bg-sports */
 
 .project-card h3 {
