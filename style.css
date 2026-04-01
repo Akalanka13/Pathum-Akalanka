@@ -536,64 +536,115 @@ nav a:hover {
     max-width: 500px;
 }
 
-/* Projects Section - Horizontal Stack Effect */
+/* Projects Section - Slideshow Effect */
+.slideshow-container {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.slideshow-track-wrapper {
+    overflow: hidden;
+    width: 100%;
+    border-radius: 20px;
+    padding: 20px 0;
+}
+
 .project-grid {
     display: flex;
-    justify-content: center;
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
     align-items: center;
-    padding: 80px 0;
-    min-height: 480px;
-    perspective: 1000px;
+    gap: 30px;
+    width: max-content;
 }
 
 .project-card {
-    transition: all 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+    transition: all 0.4s ease;
     overflow: hidden;
-    width: 220px;
-    height: 320px;
+    width: 250px;
+    height: 350px;
     flex-shrink: 0;
-    margin-left: -160px; /* Stack overlap */
-    box-shadow: -10px 0 25px rgba(0,0,0,0.6);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
     cursor: pointer;
-    transform-origin: bottom center;
+    border-radius: 20px;
 }
 
-.project-card:first-child {
-    margin-left: 0;
+.project-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(181, 53, 246, 0.4);
+    border-color: rgba(50, 214, 255, 0.6);
 }
 
-/* Base stack view - reverse delays for clean collapse */
-.project-card:nth-child(1) { transform: rotate(-8deg) translateY(10px); z-index: 1; transition-delay: 0.5s; }
-.project-card:nth-child(2) { transform: rotate(-4deg) translateY(0px); z-index: 2; transition-delay: 0.4s; }
-.project-card:nth-child(3) { transform: rotate(0deg) translateY(-5px); z-index: 3; transition-delay: 0.3s; }
-.project-card:nth-child(4) { transform: rotate(4deg) translateY(0px); z-index: 4; transition-delay: 0.2s; }
-.project-card:nth-child(5) { transform: rotate(8deg) translateY(10px); z-index: 5; transition-delay: 0.1s; }
-.project-card:nth-child(6) { transform: rotate(12deg) translateY(5px); z-index: 6; transition-delay: 0s; }
-
-/* Spread on container hover (Fan Out Effect) */
-.project-grid:hover .project-card {
-    margin-left: -15px; /* Spread state overlap */
+.slide-nav {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    color: var(--color-text-primary);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    position: absolute;
+    z-index: 10;
+    transition: all var(--transition-smooth);
 }
 
-/* Stagger opening delays and make it fan out on hover */
-.project-grid:hover .project-card:nth-child(1) { transition-delay: 0s; transform: rotate(-10deg) translateY(-10px); }
-.project-grid:hover .project-card:nth-child(2) { transition-delay: 0.1s; transform: rotate(-5deg) translateY(-20px); }
-.project-grid:hover .project-card:nth-child(3) { transition-delay: 0.2s; transform: rotate(0deg) translateY(-25px); }
-.project-grid:hover .project-card:nth-child(4) { transition-delay: 0.3s; transform: rotate(5deg) translateY(-20px); }
-.project-grid:hover .project-card:nth-child(5) { transition-delay: 0.4s; transform: rotate(10deg) translateY(-10px); }
-.project-grid:hover .project-card:nth-child(6) { transition-delay: 0.5s; transform: rotate(15deg) translateY(0px); }
-
-.project-grid:hover .project-card:first-child {
-    margin-left: 0;
+.slide-nav:hover {
+    background: rgba(181, 53, 246, 0.3);
+    color: white;
+    transform: scale(1.1);
 }
 
-/* Individual card hover focus */
-.project-grid:hover .project-card:hover {
-    transform: translateY(-40px) scale(1.15) rotate(0deg) !important;
-    z-index: 15;
-    box-shadow: 0 25px 50px rgba(181, 53, 246, 0.6);
-    border: 1px solid rgba(50, 214, 255, 0.8);
-    transition-delay: 0s !important;
+.prev-slide {
+    left: -15px;
+}
+
+.next-slide {
+    right: -15px;
+}
+
+.slideshow-dots {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.dot.active {
+    background: var(--color-neon-blue);
+    box-shadow: 0 0 10px var(--color-neon-blue);
+    transform: scale(1.2);
+}
+
+@media (max-width: 768px) {
+    .prev-slide {
+        left: 5px;
+    }
+
+    .next-slide {
+        right: 5px;
+    }
+
+    .project-card {
+        width: 220px;
+        height: 320px;
+    }
 }
 
 .card-image {
@@ -798,6 +849,7 @@ nav a:hover {
     }
 
     .hero-image-wrapper {
+        width: 100%;
         justify-content: center;
         margin-top: 2rem;
     }
@@ -807,7 +859,7 @@ nav a:hover {
         flex-wrap: wrap;
         gap: 20px;
     }
-    
+
     .project-grid:hover .project-card,
     .project-card {
         margin-left: 0 !important;
@@ -816,7 +868,7 @@ nav a:hover {
         max-width: 350px;
         height: 350px;
     }
-    
+
     .project-grid:hover .project-card:hover {
         transform: translateY(-10px) !important;
     }
