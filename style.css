@@ -782,6 +782,10 @@ nav a:hover {
     border-bottom: 1px solid var(--glass-border);
 }
 
+.video-wrapper.reel {
+    aspect-ratio: 9 / 16;
+}
+
 .video-wrapper iframe,
 .video-wrapper video {
     width: 100%;
